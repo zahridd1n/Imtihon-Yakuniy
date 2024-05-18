@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+
+<!-- -->
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Kompyuterlar  do'koni</title>
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static 'assets/css/app.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/bundles/prism/prism.css' %}">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
+  <!-- Custom style CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+  <link rel='shortcut icon' type='image/x-icon' href="{% static 'assets/img/favicon.ico' %}" />
+</head>
+
+<body>
+  <div class="loader"></div>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar sticky">
+        <div class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg
+									collapse-btn"> <i data-feather="align-justify"></i></a></li>
+            <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
+                <i data-feather="maximize"></i>
+              </a></li>
+            <li>
+              <form class="form-inline mr-auto" action="{% url 'query' %}">
+                <div class="search-element">
+                  <input class="form-control" name="q" type="search" placeholder="Search" aria-label="Search" data-width="200">
+                  <button class="btn" type="submit">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </form>
+            </li>
+          </ul>
+        </div>
+        <ul class="navbar-nav navbar-right">
+    
+ 
+          <li class="dropdown"><a href="#" data-toggle="dropdown"
+              class="nav-link dropdown-toggle nav-link-lg nav-link-user"> <img alt="image" src="{% static 'assets/img/user1.jpg' %}"
+                class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
+            <div class="dropdown-menu dropdown-menu-right pullDown">
+              <div class="dropdown-title">Salom {{user.username}}</div>
+             <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
+                Settings
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="{% url 'log_out' %}" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="index.html"> <img alt="image" src="{% static 'assets/img/img.png' %}" class="header-logo" />
+            </a>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Asosiy</li>
+            <li class="dropdown active">
+              <a href="{% url 'home' %}" class="nav-link"><i data-feather="monitor"></i><span>Asosiy</span></a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                  data-feather="briefcase"></i><span>Categorya</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{% url 'category_create' %}">Categorya Yaratish</a></li>
+                <li><a class="nav-link" href="{% url 'category_list' %}">Categoryalar</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Mahsulotlar</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{% url 'product_create' %}">Mahsulot Yaratish</a></li>
+                <li><a class="nav-link" href="{% url 'product_list' %}">Mahsulolar Ro'yxati</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="plus"></i><span>Enter Product</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{% url 'enter_product_create' %}">Mahsulot qo'shish</a></li>
+                <li><a class="nav-link" href="{% url 'enter_product_list' %}">Qo'shilganlar Ro'yxati</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="dollar-sign"></i><span>Sotish</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{% url 'export_product_create' %}">Mahsulot chiqarvorish</a></li>
+                <li><a class="nav-link" href="{% url 'export_product_list' %}">Sotilganlar  Ro'yxati</a></li>
+              </ul>
+            </li>
+                <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="chevrons-left"></i><span>Qaytarib yuborish</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{% url 'return_product' %}">Mahsulotni qaytarish</a></li>
+                <li><a class="nav-link" href="{% url 'return_product_list' %}">Qaytarilganlar  Ro'yxati</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </aside>
+      </div>
+      <!-- Main Content -->
+      {% block content %}
+      {% endblock %}
+
+    
+    </div>
+  </div>
+  <!-- General JS Scripts -->
+  <script src="{% static 'assets/js/app.min.js' %}"></script>
+  <!-- JS Libraies -->
+  <script src="{% static 'assets/bundles/apexcharts/apexcharts.min.js' %}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{% static 'assets/js/page/index.js' %}"></script>
+  <!-- Template JS File -->
+  <script src="{% static 'assets/js/scripts.js' %}"></script>
+  <!-- Custom JS File -->
+  <script src="{% static 'assets/js/custom.js' %}"></script>
+</body>
+
+
+<!-- index.html  21 Nov 2019 03:47:04 GMT -->
+</html>
