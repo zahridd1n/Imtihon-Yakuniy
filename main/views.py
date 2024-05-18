@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.utils.dateparse import parse_date
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from . import models
@@ -53,16 +54,28 @@ def home(request):
     chiqim = 0
     kirim = 0
 
+    enter_producs_quantity = 0
+    export_producs_quantity = 0
+
     for product in products:
         chiqim += float(product.price) * int(product.quantity)
 
     for enter_product in enter_products:
         chiqim += float(enter_product.product.price) * int(enter_product.quantity)
+        enter_producs_quantity += int(enter_product.quantity)
 
     for eport_product in eport_products:
         kirim += float(eport_product.product.price) * int(eport_product.quantity)
+        export_producs_quantity += int(eport_product.quantity)
 
-    return render(request, 'index.html', context={'kirim': kirim, 'chiqim': chiqim})
+    context = {
+        'kirim': kirim,
+        'chiqim': chiqim,
+        'export_producs_quantity': export_producs_quantity,
+        'enter_producs_quantity': enter_producs_quantity,
+    }
+
+    return render(request, 'index.html', context)
 
 
 # -----------------Category------------
